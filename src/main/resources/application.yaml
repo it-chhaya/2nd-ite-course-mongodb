@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: course
+  data:
+    mongodb:
+      uri: mongodb://chanchhaya:chanchhaya%2510@localhost:27024/
+      database: db_course
+server:
+  tomcat:
+    relaxed-query-chars: >
+      |,[,],{,}
+
+stream:
+  image: http://localhost:8080/image/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true

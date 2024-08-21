@@ -1,0 +1,52 @@
+services:
+  db-course:
+    image: "mongo:7.0.12-rc1-jammy"
+    container_name: "db-course"
+    ports:
+      - "27024:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=chanchhaya
+      - MONGO_INITDB_ROOT_PASSWORD=chanchhaya%10
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    command: "mongod"
+    healthcheck:
+      test: "mongostat -n 1"
+      interval: 5s
+      timeout: 2s
+      retries: 60
+    volumes:
+      - course_mongodb_data_vol:/data/db/
+      - course_mongodb_log_vol:/var/log/mongodb/
+    networks:
+      - course_mongodb_net
+  api-course:
+    build: .
+    image: "api-course"
+    container_name: "api-course"
+    ports:
+      - "8082:8080"
+    depends_on:
+      db-course:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    healthcheck:
+      test: "curl --fail --silent localhost:8082/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - course_mongodb_net
+
+volumes:
+  course_mongodb_data_vol:
+  course_mongodb_log_vol:
+
+networks:
+  course_mongodb_net:

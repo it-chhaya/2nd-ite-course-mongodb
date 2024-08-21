@@ -1,0 +1,22 @@
+package dev.chanchhaya.course.features.course.dto;
+
+import lombok.Builder;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Builder
+public record CourseSnippetResponse(String id,
+                                    String uuid,
+                                    String title,
+                                    String slug,
+                                    String description,
+                                    BigDecimal price,
+                                    Integer discount,
+                                    Boolean isPaid,
+                                    Boolean isDrafted,
+                                    String thumbnail,
+                                    String categoryName,
+                                    String instructorUsername,
+                                    LocalDateTime updatedAt) {
+}
