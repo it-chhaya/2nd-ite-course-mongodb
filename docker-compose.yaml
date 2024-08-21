@@ -7,16 +7,13 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=chanchhaya
       - MONGO_INITDB_ROOT_PASSWORD=chanchhaya%10
-    deploy:
-      resources:
-        limits:
-          memory: 512m
-    command: "mongod"
+    restart: always
     healthcheck:
-      test: "mongostat -n 1"
-      interval: 5s
-      timeout: 2s
-      retries: 60
+      test: echo 'db.runCommand({find:"db_course.chanchhaya"}).ok' | mongosh --authenticationDatabase admin --host localhost -u chanchhaya -p chanchhaya%10 admin --quiet | grep -q 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     volumes:
       - course_mongodb_data_vol:/data/db/
       - course_mongodb_log_vol:/var/log/mongodb/
@@ -28,6 +25,8 @@ services:
     container_name: "api-course"
     ports:
       - "8082:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       db-course:
         condition: service_healthy
@@ -36,7 +35,7 @@ services:
         limits:
           memory: 512m
     healthcheck:
-      test: "curl --fail --silent localhost:8082/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
