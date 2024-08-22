@@ -1,6 +1,11 @@
+FROM gradle:8.8-jdk21-alpine AS setup
+WORKDIR /project
+COPY . .
+RUN gradle clean build
+
 FROM ghcr.io/graalvm/jdk-community:21 AS builder
 WORKDIR /extracted
-ADD ./build/libs/*.jar app.jar
+COPY --from=setup /project/build/libs/*.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM ghcr.io/graalvm/jdk-community:21
