@@ -35,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Value("${stream.image}")
     private String streamImage;
 
+
     @Override
     public List<PopularCategoryResponse> findPopularCategories() {
         return categoryRepository.findAll().stream()
@@ -47,6 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public CategoryResponse findById(String id) {
 
@@ -56,6 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryMapper.toCategoryDto(foundCategory);
     }
+
 
     @Override
     public CategoryResponse findByUuid(String uuid) {
@@ -67,12 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.toCategoryDto(foundCategory);
     }
 
+
     @Override
     public List<CategoryResponse> findList() {
         List<Category> categories = categoryRepository.findAllByIsDeletedFalse();
         return categoryMapper.toCategoryDtoList(categories);
     }
-
 
 
     @Override
@@ -85,6 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
         foundCategory.setName(editionDto.name());
         categoryRepository.save(foundCategory);
     }
+
 
     @Override
     public void createNew(CategoryCreationRequest creationDto) {
@@ -101,6 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(newCategory);
     }
 
+
     @Override
     public void removeById(String id) {
 
@@ -110,6 +115,7 @@ public class CategoryServiceImpl implements CategoryService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 String.format("Category with ID = %s doesn't exist in database!", id));
     }
+
 
     @Override
     public void disable(String id) {
@@ -122,6 +128,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(foundCategory);
     }
 
+
     @Override
     public void enable(String id) {
 
@@ -133,13 +140,13 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(foundCategory);
     }
 
+
     @Override
     public Optional<CategoryResponse> findCategoryByName(String name) {
         Query query = new Query(Criteria.where("name").is(name));
         Category foundCategory = mongoTemplate.findOne(query, Category.class);
 
-        return Optional.ofNullable(foundCategory)
-                .map(categoryMapper::toCategoryDto);
+        return Optional.ofNullable(foundCategory).map(categoryMapper::toCategoryDto);
     }
 
 

@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Builder
 @Document(collection = "categoryDB")
+@ToString
 public class Category {
 
     private String id;

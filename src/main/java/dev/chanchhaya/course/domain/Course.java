@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @Document(collection = "courseDB")
 @Builder
+@ToString
 public class Course {
 
     @Id

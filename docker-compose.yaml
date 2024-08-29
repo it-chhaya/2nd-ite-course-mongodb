@@ -22,6 +22,7 @@ services:
   api-course:
     build: .
     image: "api-course"
+    hostname: "api-course"
     container_name: "api-course"
     ports:
       - "8082:8080"
