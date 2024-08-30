@@ -25,7 +25,7 @@ class CoursesServiceTests {
         Query query = new Query();
         Criteria criteria = Criteria
                 .where("title")
-                .regex("spring", "i");
+                .regex("test", "i");
         Criteria criteria2 = Criteria
                 .where("price")
                 .gte(100);
@@ -38,6 +38,7 @@ class CoursesServiceTests {
         //List<Course> courses = courseRepository.findCoursesTitle("spring");
         //List<Course> courses = courseRepository.findCoursesByPrice(BigDecimal.valueOf(100));
         System.out.println(courses);
+        System.out.println(courses.size());
     }
 
 }

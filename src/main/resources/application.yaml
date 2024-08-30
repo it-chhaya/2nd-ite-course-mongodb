@@ -10,6 +10,7 @@ spring:
     mongodb:
       uri: mongodb://chanchhaya:chanchhaya%2510@localhost:27024/
       database: db_course
+
 server:
   tomcat:
     relaxed-query-chars: >
