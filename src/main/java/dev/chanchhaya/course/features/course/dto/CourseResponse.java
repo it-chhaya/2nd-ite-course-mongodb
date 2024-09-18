@@ -2,6 +2,7 @@ package dev.chanchhaya.course.features.course.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
+import org.bson.types.Decimal128;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public record CourseResponse(String id,
                              String title,
                              String slug,
                              String description,
-                             BigDecimal price,
+                             Decimal128 price,
                              Integer discount,
                              Boolean isPaid,
                              Boolean isDrafted,

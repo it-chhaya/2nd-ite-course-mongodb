@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://chanchhaya:chanchhaya%2510@db-course:27017/

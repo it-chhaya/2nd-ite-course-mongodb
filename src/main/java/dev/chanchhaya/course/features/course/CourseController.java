@@ -132,7 +132,7 @@ public class CourseController {
     }
 
 
-    @PostMapping("/filter")
+    @PostMapping("/filters")
     Page<?> filter(@RequestBody FilterDto filter,
                    @RequestParam(required = false, defaultValue = "SNIPPET") Part part,
                    @RequestParam(defaultValue = "0") int page,

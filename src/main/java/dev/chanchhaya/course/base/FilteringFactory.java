@@ -1,8 +1,10 @@
 package dev.chanchhaya.course.base;
 
 import lombok.NoArgsConstructor;
+import org.bson.types.Decimal128;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -30,6 +32,7 @@ public class FilteringFactory {
         converterForClass.put(Boolean.class, Boolean::valueOf);
         converterForClass.put(boolean.class, Boolean::valueOf);
         converterForClass.put(LocalDateTime.class, LocalDateTime::parse);
+        converterForClass.put(Decimal128.class, Decimal128::parse);
     }
 
     public static <T> Filtering parseFromParams(List<String> filter, Class<T> typeParameterClass) {
@@ -49,10 +52,14 @@ public class FilteringFactory {
                 // parse the operator
                 Filtering.Operator operator = Filtering.Operator.fromString(filterSplit[1]);
 
+                System.out.println(operator.toString());
+
                 // the key can be nested, so we split by . to get the nested keys
                 // example1: key1.key2.key3 will result in nested = [key1, key2, key3]
                 // example2: key1 will result in nested = [key1]
                 String[] nested = filterSplit[0].split("\\.");
+
+                System.out.println(Arrays.toString(nested));
 
                 // if the operator is "in" or "nin", we need to split the value by ; to get the list of values
                 // "in" and nin are the only operators that can have multiple values

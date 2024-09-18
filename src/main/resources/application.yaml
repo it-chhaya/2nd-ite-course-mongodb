@@ -34,12 +34,3 @@ management:
       probes:
         enabled: true
       show-details: always
-
----
-spring:
-  config:
-    activate:
-      on-profile: docker
-  data:
-    mongodb:
-      uri: mongodb://chanchhaya:chanchhaya%2510@db-course:27017/

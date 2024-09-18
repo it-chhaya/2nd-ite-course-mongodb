@@ -1,6 +1,7 @@
 package dev.chanchhaya.course.domain;
 
 import lombok.*;
+import org.bson.types.Decimal128;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,7 +28,7 @@ public class Course {
     private String description;
     private String thumbnail;
     private String contents;
-    private BigDecimal price;
+    private Decimal128 price;
     private Integer discount;
     private String categoryName;
     private List<Section> sections;
@@ -41,6 +42,8 @@ public class Course {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private Instructor instructor;
 
 }
 
