@@ -28,7 +28,7 @@ public class Course {
     private String description;
     private String thumbnail;
     private String contents;
-    private Decimal128 price;
+    private BigDecimal price;
     private Integer discount;
     private String categoryName;
     private List<Section> sections;

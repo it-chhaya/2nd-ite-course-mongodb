@@ -32,6 +32,7 @@ public class FilteringFactory {
         converterForClass.put(Boolean.class, Boolean::valueOf);
         converterForClass.put(boolean.class, Boolean::valueOf);
         converterForClass.put(LocalDateTime.class, LocalDateTime::parse);
+        converterForClass.put(BigDecimal.class, (value) -> value);
         converterForClass.put(Decimal128.class, Decimal128::parse);
     }
 
