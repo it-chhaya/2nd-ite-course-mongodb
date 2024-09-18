@@ -19,7 +19,7 @@ public record CourseCreationRequest(@NotBlank
                                     String thumbnail,
                                     @NotNull
                                     @Positive
-                                    Decimal128 price,
+                                    BigDecimal price,
                                     String content,
                                     @NotBlank
                                     String categoryName,

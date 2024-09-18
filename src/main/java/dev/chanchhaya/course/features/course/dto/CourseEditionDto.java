@@ -14,7 +14,7 @@ public record CourseEditionDto(@NotBlank
                                String description,
                                @NotNull
                                @Positive
-                               Decimal128 price,
+                               BigDecimal price,
                                @NotNull
                                @Positive
                                Integer discount,
