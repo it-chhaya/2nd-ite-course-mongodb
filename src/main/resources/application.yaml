@@ -10,6 +10,21 @@ spring:
     mongodb:
       uri: mongodb://chanchhaya:chanchhaya%2510@localhost:27024/
       database: db_course
+  mail:
+    username: chhayajr10@gmail.com
+    password: wbpj vekx wgqf npqq
+    host: smtp.gmail.com
+    port: '587'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 15MB
 
 server:
   tomcat:
@@ -34,3 +49,7 @@ management:
       probes:
         enabled: true
       show-details: always
+
+file-server:
+  base-uri: 'http://localhost:8080/file/'
+  server-path: 'C:\\Users\\iLJiMae\\OneDrive\\Pictures\\file-server\\'

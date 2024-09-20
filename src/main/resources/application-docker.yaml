@@ -2,3 +2,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://chanchhaya:chanchhaya%2510@db-course:27017/
+
+# https://course-api.istad.co
+file-server:
+  base-uri: 'https://course-api.istad.co/file/'
+  server-path: '/file-server/'
