@@ -72,6 +72,7 @@ public class SecurityConfig {
 
         // Protect routes
         http.authorizeHttpRequests(endpoint -> endpoint
+                .requestMatchers(HttpMethod.POST, "/api/v1/courses/filters").permitAll()
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers("/api/v1/files/**", "/file/**").permitAll()
                 .requestMatchers(
