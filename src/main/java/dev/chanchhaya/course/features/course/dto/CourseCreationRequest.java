@@ -23,5 +23,5 @@ public record CourseCreationRequest(@NotBlank
                                     String content,
                                     @NotBlank
                                     String categoryName,
-                                    Instructor instructor) {
+                                    String instructorUsername) {
 }

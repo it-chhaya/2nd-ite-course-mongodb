@@ -250,7 +250,7 @@ public class CourseServiceImpl implements CourseService {
 
         course.setUuid(UUID.randomUUID().toString());
         course.setCode(SecureRandomUtil.init(16));
-        course.setInstructorUsername("chanchhaya"); // Need to extract form security context
+        course.setInstructorUsername(creationDto.instructorUsername()); // Need to extract form security context
         course.setSections(new ArrayList<>());
         course.setCreatedAt(LocalDateTime.now());
         course.setUpdatedAt(LocalDateTime.now());

@@ -12,21 +12,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class CourseMapper {
 
-    StreamUtil streamUtil;
-
-    @Autowired
-    public void setStreamUtil(StreamUtil streamUtil) {
-        this.streamUtil = streamUtil;
-    }
-
-    String getImageUri() {
-        return streamUtil.buildImageUri();
-    }
-
-    @Mapping(target = "thumbnail", expression = "java(getImageUri() + course.getThumbnail())")
     abstract CourseSnippetResponse toCourseSnippetDto(Course course);
 
-    @Mapping(target = "thumbnail", expression = "java(getImageUri() + course.getThumbnail())")
     abstract CourseResponse toCourseDto(Course course);
 
     abstract List<CourseResponse> toCourseDtoList(List<Course> courses);

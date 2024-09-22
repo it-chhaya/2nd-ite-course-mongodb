@@ -1,6 +1,7 @@
 package dev.chanchhaya.course.features.user;
 
 import dev.chanchhaya.course.features.user.dto.FavoriteCourseResponse;
+import dev.chanchhaya.course.features.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+
+    @GetMapping("/me")
+    public UserResponse me() {
+        return userService.me();
+    }
 
 
     @PostMapping("/{userId}/favorites/{courseId}")
