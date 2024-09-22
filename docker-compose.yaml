@@ -41,6 +41,8 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
+    volumes:
+      - "./home/istad/deployment-chhaya/file-server/:/file-server/"
     networks:
       - course_mongodb_net
 
