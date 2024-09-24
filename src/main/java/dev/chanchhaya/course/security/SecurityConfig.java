@@ -97,7 +97,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         // Disable the CORS integration within Spring Security
-        http.cors(AbstractHttpConfigurer::disable);
+        // http.cors(AbstractHttpConfigurer::disable);
 
         // Make API stateless
         http.sessionManagement(session -> session
