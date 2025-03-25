@@ -29,6 +29,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Duration;
@@ -36,14 +37,13 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
@@ -53,16 +53,12 @@ public class AuthServiceImpl implements AuthService {
     private final JavaMailSender javaMailSender;
 
     private final UserMapper userMapper;
-
-    @Value("${spring.mail.username}")
-    private String adminMail;
-
     private final String TOKEN_TYPE = "Bearer";
-
     private final DaoAuthenticationProvider daoAuthenticationProvider;
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
-
     private final JwtEncoder jwtEncoder;
+    @Value("${spring.mail.username}")
+    private String adminMail;
     private JwtEncoder jwtEncoderRefreshToken;
 
     @Autowired
@@ -222,6 +218,8 @@ public class AuthServiceImpl implements AuthService {
 
         user.setIsDeleted(false);
         userRepository.save(user);
+
+        emailVerificationRepository.delete(emailVerification);
     }
 
 
@@ -254,7 +252,7 @@ public class AuthServiceImpl implements AuthService {
         // Step 1. Prepare email verification data
         EmailVerification emailVerification = new EmailVerification();
         emailVerification.setVerificationCode(RandomUtil.random6Digits());
-        emailVerification.setExpiryTime(LocalTime.now().plusMinutes(1));
+        emailVerification.setExpiryTime(LocalTime.now().plusMinutes(3));
         emailVerification.setUserId(user.getId());
 
         emailVerificationRepository.save(emailVerification);
@@ -262,14 +260,14 @@ public class AuthServiceImpl implements AuthService {
         // Step 2. Prepare to send mail
 
         String myHtml = String.format("""
-                <h1>MBanking - Email Verification</h1>
+                <h1>E-Learning - Email Verification</h1>
                 <hr/>
                 %s
                 """, emailVerification.getVerificationCode());
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject("Email Verification - MBanking");
+        helper.setSubject("Email Verification - E-Learning");
         helper.setTo(user.getEmail());
         helper.setFrom(adminMail);
         helper.setText(myHtml, true);
