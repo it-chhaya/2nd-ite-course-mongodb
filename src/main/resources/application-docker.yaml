@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://chanchhaya:chanchhaya%2510@db-course:27017/
+      uri: mongodb://preuniversity:PreUniversity2025@mongodb-pre:27017/
 
 # https://course-api.istad.co
 file-server:

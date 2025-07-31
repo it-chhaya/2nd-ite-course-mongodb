@@ -8,7 +8,7 @@ spring:
     name: course
   data:
     mongodb:
-      uri: mongodb://chanchhaya:chanchhaya%2510@localhost:27024/
+      uri: mongodb://preuniversity:PreUniversity2025@202.178.125.77:27024/
       database: db_course
   mail:
     username: chhayajr10@gmail.com
