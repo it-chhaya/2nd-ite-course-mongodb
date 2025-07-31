@@ -15,12 +15,6 @@ public class UserController {
     private final UserService userService;
 
 
-    @GetMapping("/me")
-    public UserResponse me() {
-        return userService.me();
-    }
-
-
     @PostMapping("/{userId}/favorites/{courseId}")
     public void addFavoriteCourse(@PathVariable String userId, @PathVariable String courseId) {
         userService.addFavoriteCourse(userId, courseId);

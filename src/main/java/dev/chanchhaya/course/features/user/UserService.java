@@ -13,6 +13,4 @@ public interface UserService {
 
     List<FavoriteCourseResponse> getFavoriteCourses(String userId);
 
-    UserResponse me();
-
 }

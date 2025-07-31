@@ -11,20 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public abstract class CategoryMapper {
+public interface CategoryMapper {
 
-    StreamUtil streamUtil;
-
-    @Autowired
-    public void setStreamUtil(StreamUtil streamUtil) {
-        this.streamUtil = streamUtil;
-    }
-
-    String getImageUri() {
-        return streamUtil.buildImageUri();
-    }
-
-    @Mapping(target = "icon", expression = "java(getImageUri() + category.getIcon())")
     abstract CategoryResponse toCategoryDto(Category category);
 
     abstract List<CategoryResponse> toCategoryDtoList(List<Category> categories);
